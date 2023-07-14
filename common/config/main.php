@@ -9,6 +9,7 @@ return [
         'cache' => [
             'class' => \yii\caching\FileCache::class,
         ],
+        /*
         'view' => [
             'theme' => [
                 'pathMap' => [
@@ -16,5 +17,6 @@ return [
                 ],
             ],
         ],
+        */
     ],
 ];
