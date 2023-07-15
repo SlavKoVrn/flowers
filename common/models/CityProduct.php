@@ -5,22 +5,24 @@ namespace common\models;
 use yii\behaviors\SluggableBehavior;
 
 /**
- * This is the model class for table "{{%product}}".
+ * This is the model class for table "{{%city_product}}".
  *
  * @property int $id
+ * @property int|null $city_id
+ * @property int|null $product_id
  * @property string|null $name
  * @property string|null $slug
  * @property int|null $price
  * @property string|null $description
  */
-class Product extends \yii\db\ActiveRecord
+class CityProduct extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%product}}';
+        return '{{%city_product}}';
     }
 
     /**
@@ -29,7 +31,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['price'], 'integer'],
+            [['city_id', 'product_id', 'price'], 'integer'],
             [['description'], 'string'],
             [['name', 'slug'], 'string', 'max' => 255],
         ];
@@ -42,6 +44,8 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'Ид',
+            'city_id' => 'Город',
+            'product_id' => 'Продукт',
             'name' => 'Название',
             'slug' => 'Линк',
             'price' => 'Цена',
@@ -63,10 +67,10 @@ class Product extends \yii\db\ActiveRecord
 
     /**
      * {@inheritdoc}
-     * @return ProductQuery the active query used by this AR class.
+     * @return CityProductQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new ProductQuery(get_called_class());
+        return new CityProductQuery(get_called_class());
     }
 }

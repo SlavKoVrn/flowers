@@ -37,6 +37,7 @@
                 'items' => [
                     ['label' => 'Города',  'icon' => 'th', 'url' => ['/city']],
                     ['label' => 'Продукты',  'icon' => 'th', 'url' => ['/product']],
+                    ['label' => 'Продукты по городам',  'icon' => 'th', 'url' => ['/city-product']],
                     [
                         'label' => 'Starter Pages',
                         'icon' => 'tachometer-alt',
