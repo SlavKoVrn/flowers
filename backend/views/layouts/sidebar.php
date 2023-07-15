@@ -35,6 +35,7 @@
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
+                    ['label' => 'Города',  'icon' => 'th', 'url' => ['/city']],
                     [
                         'label' => 'Starter Pages',
                         'icon' => 'tachometer-alt',
