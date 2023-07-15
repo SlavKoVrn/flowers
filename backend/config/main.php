@@ -13,7 +13,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
-    'defaultRoute' => '/city',
+    'defaultRoute' => '/product',
     'components' => [
         'request' => [
             'baseUrl' => '/admin',
