@@ -1,7 +1,11 @@
 <?php
-
+use common\models\City;
+use common\models\CityProduct;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\grid\ActionColumn;
+use yii\helpers\Url;
+use yii\helpers\Html;
 
 /** @var yii\web\View $this */
 /** @var common\models\CityProductSearch $searchModel */
@@ -20,18 +24,38 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'id',
-            'city_id',
-            'product_id',
+            [
+                'attribute'=>'city_id',
+                'filter'=>City::getCities(),
+                'content'=>function($model){
+                    return $model->city->name;
+                }
+            ],
+            [
+                'attribute'=>'product_id',
+                'content'=>function($model){
+                    return $model->product->name;
+                }
+            ],
             'name',
             'slug',
-            'price',
+            [
+                'attribute'=>'price',
+                'contentOptions' => ['style' => 'text-align:right;'],
+            ],
             //'description:ntext',
             /*
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, CityProduct $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'class' => ActionColumn::class,
+                'template' => '{view}',
+                'buttons' => [
+                    'view' => function ($url, $model) {
+                        return Html::a(
+                            '<span class="mdi mdi-eye"></span>',
+                            $url, ['class' => 'btn btn-success', 'title' => 'Просмотр']
+                        );
+                    },
+                ],
             ],
             */
         ],

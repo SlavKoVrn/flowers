@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use yii\helpers\ArrayHelper;
+
 /**
  * This is the model class for table "{{%city}}".
  *
@@ -40,4 +42,11 @@ class City extends \yii\db\ActiveRecord
             'name' => 'Название',
         ];
     }
+
+    public static function getCities()
+    {
+        $cities = self::find()->all();
+        return ArrayHelper::map($cities,'id','name');
+    }
+
 }

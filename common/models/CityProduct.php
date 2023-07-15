@@ -34,6 +34,7 @@ class CityProduct extends \yii\db\ActiveRecord
             [['city_id', 'product_id', 'price'], 'integer'],
             [['description'], 'string'],
             [['name', 'slug'], 'string', 'max' => 255],
+            [['name'], 'required'],
         ];
     }
 
@@ -63,6 +64,16 @@ class CityProduct extends \yii\db\ActiveRecord
                 'ensureUnique' => true,
             ],
         ];
+    }
+
+    public function getProduct()
+    {
+        return $this->hasOne(Product::class, ['id' => 'product_id']);
+    }
+
+    public function getCity()
+    {
+        return $this->hasOne(City::class, ['id' => 'city_id']);
     }
 
     /**

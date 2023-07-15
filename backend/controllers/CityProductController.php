@@ -4,9 +4,12 @@ namespace backend\controllers;
 
 use common\models\CityProduct;
 use common\models\CityProductSearch;
+use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 /**
  * CityProductController implements the CRUD actions for CityProduct model.
@@ -58,6 +61,50 @@ class CityProductController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    public function actionValidate()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $model = new CityProduct();
+        $model->load(Yii::$app->request->post());
+        return ActiveForm::validate($model);
+    }
+
+    public function actionCreate()
+    {
+        if (Yii::$app->request->isGet){
+            $get = Yii::$app->request->get();
+            $model = CityProduct::find()->where([
+                'city_id' => $get['city_id'],
+                'product_id' => $get['product_id'],
+            ])->one();
+            if (!$model){
+                $model = new CityProduct();
+                $model->city_id = $get['city_id'];
+                $model->product_id = $get['product_id'];
+            }
+            return $this->renderAjax('_form', [
+                'model' => $model,
+            ]);
+        }
+
+        if (Yii::$app->request->isPost){
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $post = Yii::$app->request->post();
+            $model = CityProduct::find()->where([
+                'city_id' => $post['CityProduct']['city_id'],
+                'product_id' => $post['CityProduct']['product_id'],
+            ])->one();
+            if (!$model){
+                $model = new CityProduct();
+            }
+            if ($model->load($post) and $model->save()) {
+                return ['success'=>'true'];
+            } else {
+                return ActiveForm::validate($model);
+            }
+        }
     }
 
     /**

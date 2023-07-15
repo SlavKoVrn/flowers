@@ -61,6 +61,11 @@ class Product extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getCityProducts()
+    {
+        return $this->hasMany(CityProduct::class, ['product_id' => 'id']);
+    }
+
     /**
      * {@inheritdoc}
      * @return ProductQuery the active query used by this AR class.
