@@ -1,11 +1,8 @@
 <?php
+
 use common\models\City;
-use common\models\CityProduct;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use yii\grid\ActionColumn;
-use yii\helpers\Url;
-use yii\helpers\Html;
 
 /** @var yii\web\View $this */
 /** @var common\models\CityProductSearch $searchModel */
@@ -64,3 +61,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::end(); ?>
 
 </div>
+<style>
+    ul.pagination > li {
+        padding:12px;
+    }
+    ul.pagination > li.active {
+        color:white;
+        background-color:lightgrey;
+    }
+</style>
