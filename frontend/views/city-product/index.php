@@ -27,3 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::end(); ?>
 
 </div>
+<style>
+    ul.pagination > li {
+        padding:12px;
+    }
+    ul.pagination > li.active {
+        color:white;
+        background-color:lightgrey;
+    }
+</style>
