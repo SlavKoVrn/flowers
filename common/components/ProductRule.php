@@ -13,8 +13,19 @@ class ProductRule extends \yii\web\UrlRule
         if ($route === 'product/view' and isset($params['slug'])) {
             return 'flower/'.$params['slug'];
         }
+        if ($route === 'product/index') {
+            $query = http_build_query($params);
+            if (!empty($query)) {
+                return 'flowers?' . $query;
+            }
+            return 'flowers';
+        }
         if ($route === 'city-product/index' and isset($params['city_id'])) {
             $city = City::findOne($params['city_id']);
+            $query = http_build_query($params);
+            if (!empty($query)) {
+                return $city->code.'/flowers?' . $query;
+            }
             return $city->code.'/flowers';
         }
         return false;
