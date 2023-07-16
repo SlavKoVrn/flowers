@@ -10,7 +10,7 @@ use yii\widgets\DetailView;
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = [
     'label' => 'Продукты по городу '.$model->city->name,
-    'url' => Url::to(['city-product/index', 'city_id' => $model->city->id]),
+    'url' => Url::to(['city-product/index',  'CityProductSearch' => ['city_id' => $model->city->id]]),
 ];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);

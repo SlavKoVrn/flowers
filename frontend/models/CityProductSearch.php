@@ -11,7 +11,6 @@ use yii\data\ActiveDataProvider;
  */
 class CityProductSearch extends CityProduct
 {
-    public $city = null;
 
     /**
      * {@inheritdoc}
@@ -43,10 +42,6 @@ class CityProductSearch extends CityProduct
     public function search($params)
     {
         $query = CityProduct::find();
-        if ($this->city){
-            $query->andWhere(['city_id' => $this->city]);
-        }
-        $sql = $query->createCommand()->rawSql;
 
         // add conditions that should always apply here
 

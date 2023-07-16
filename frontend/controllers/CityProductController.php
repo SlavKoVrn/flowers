@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\City;
 use common\models\CityProduct;
 use frontend\models\CityProductSearch;
+use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -37,12 +38,18 @@ class CityProductController extends Controller
      *
      * @return string
      */
-    public function actionIndex($city_id)
+    public function actionIndex()
     {
+        /*
+        $params = $this->request->queryParams;
+        $params = ['CityProductSearch' => ['city_id' => $city_model->id]];
+        */
+        $url = trim(Yii::$app->request->pathInfo, '/');
+        $explode = explode('/',$url);
+        $city_model = City::find()->where(['code'=>$explode[0]])->one();
+
         $searchModel = new CityProductSearch();
-        $searchModel->city = $city_id;
         $dataProvider = $searchModel->search($this->request->queryParams);
-        $city_model = City::findOne($city_id);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

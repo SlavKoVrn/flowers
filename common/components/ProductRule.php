@@ -20,8 +20,8 @@ class ProductRule extends \yii\web\UrlRule
             }
             return 'flowers';
         }
-        if ($route === 'city-product/index' and isset($params['city_id'])) {
-            $city = City::findOne($params['city_id']);
+        if ($route === 'city-product/index' and isset($params['CityProductSearch']['city_id'])) {
+            $city = City::findOne($params['CityProductSearch']['city_id']);
             $query = http_build_query($params);
             if (!empty($query)) {
                 return $city->code.'/flowers?' . $query;
@@ -38,7 +38,7 @@ class ProductRule extends \yii\web\UrlRule
         $city = City::find()->where(['code' => $explode[0]])->one();
         if ($city){
             if ($explode[1] == 'flowers' and count($explode) == 2){
-                return ['city-product/index', ['city_id' => $city->id ]];
+                return ['city-product/index',[]];
             }
             if ($explode[1] == 'flower' and count($explode) == 3){
                 return ['product/view', ['city'=> $city->code, 'slug' => $explode[2] ]];
