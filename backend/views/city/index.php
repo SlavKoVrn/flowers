@@ -27,9 +27,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'id',
-            'code',
-            'name',
+            [
+                'attribute'=>'id',
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'id')?'fa fa-sort-down':(($searchModel->order == '-id')?'fa fa-sort-up':'fa fa-sort'),
+                ],
+            ],
+            [
+                'attribute'=>'code',
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'code')?'fa fa-sort-down':(($searchModel->order == '-code')?'fa fa-sort-up':'fa fa-sort'),
+                ],
+            ],
+            [
+                'attribute'=>'name',
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'name')?'fa fa-sort-down':(($searchModel->order == '-name')?'fa fa-sort-up':'fa fa-sort'),
+                ],
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, City $model, $key, $index, $column) {

@@ -27,12 +27,31 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'id',
-            'name',
-            'slug',
+            [
+                'attribute'=>'id',
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'id')?'fa fa-sort-down':(($searchModel->order == '-id')?'fa fa-sort-up':'fa fa-sort'),
+                ],
+            ],
+            [
+                'attribute'=>'name',
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'name')?'fa fa-sort-down':(($searchModel->order == '-name')?'fa fa-sort-up':'fa fa-sort'),
+                ],
+            ],
+            [
+                'attribute'=>'slug',
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'slug')?'fa fa-sort-down':(($searchModel->order == '-slug')?'fa fa-sort-up':'fa fa-sort'),
+                ],
+            ],
             [
                 'attribute'=>'price',
                 'contentOptions' => ['style' => 'text-align:right;'],
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'price')?'fa fa-sort-down':(($searchModel->order == '-price')?'fa fa-sort-up':'fa fa-sort'),
+                ],
+
             ],
             [
                 'class' => ActionColumn::className(),

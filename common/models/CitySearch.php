@@ -10,6 +10,8 @@ use yii\data\ActiveDataProvider;
  */
 class CitySearch extends City
 {
+    public $order;
+
     /**
      * {@inheritdoc}
      */
@@ -48,6 +50,10 @@ class CitySearch extends City
         ]);
 
         $this->load($params);
+
+        if (isset($params['sort'])){
+            $this->order = $params['sort'];
+        }
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails

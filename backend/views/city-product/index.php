@@ -20,25 +20,50 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'id',
+            [
+                'attribute'=>'id',
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'id')?'fa fa-sort-down':(($searchModel->order == '-id')?'fa fa-sort-up':'fa fa-sort'),
+                ],
+            ],
             [
                 'attribute'=>'city_id',
                 'filter'=>City::getCities(),
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'city_id')?'fa fa-sort-down':(($searchModel->order == '-city_id')?'fa fa-sort-up':'fa fa-sort'),
+                ],
                 'content'=>function($model){
                     return $model->city->name;
                 }
             ],
             [
                 'attribute'=>'product_id',
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'product_id')?'fa fa-sort-down':(($searchModel->order == '-product_id')?'fa fa-sort-up':'fa fa-sort'),
+                ],
                 'content'=>function($model){
                     return $model->product->name;
                 }
             ],
-            'name',
-            'slug',
+            [
+                'attribute'=>'name',
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'name')?'fa fa-sort-down':(($searchModel->order == '-name')?'fa fa-sort-up':'fa fa-sort'),
+                ],
+            ],
+            [
+                'attribute'=>'slug',
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'slug')?'fa fa-sort-down':(($searchModel->order == '-slug')?'fa fa-sort-up':'fa fa-sort'),
+                ],
+            ],
             [
                 'attribute'=>'price',
                 'contentOptions' => ['style' => 'text-align:right;'],
+                'sortLinkOptions' => [
+                    'class' => ($searchModel->order == 'price')?'fa fa-sort-down':(($searchModel->order == '-price')?'fa fa-sort-up':'fa fa-sort'),
+                ],
+
             ],
             //'description:ntext',
             /*
