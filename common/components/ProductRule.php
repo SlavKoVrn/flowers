@@ -18,6 +18,12 @@ class ProductRule extends \yii\web\UrlRule
     {
         $url = trim($request->pathInfo, '/');
         $explode = explode('/',$url);
+        if (empty($explode[0])){
+            return ['product/index', []];
+        }
+        if ($explode[0] == 'flowers' and count($explode) == 1){
+            return ['product/index', []];
+        }
         if ($explode[0] == 'flowers' and count($explode) == 2){
             return ['product/view', ['slug' => $explode[1] ]];
         }
