@@ -42,6 +42,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'flowers' => [
+                    'class' => \common\components\ProductRule::class,
+                    'pattern' => 'flowers',
+                    'route'=>'flowers',
+                ]
             ],
         ],
     ],
