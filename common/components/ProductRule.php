@@ -2,6 +2,7 @@
 namespace common\components;
 
 use common\models\City;
+use Yii;
 
 class ProductRule extends \yii\web\UrlRule
 {
@@ -22,6 +23,16 @@ class ProductRule extends \yii\web\UrlRule
         }
         if ($route === 'city-product/index' and isset($params['CityProductSearch']['city_id'])) {
             $city = City::findOne($params['CityProductSearch']['city_id']);
+            $query = http_build_query($params);
+            if (!empty($query)) {
+                return $city->code.'/flowers?' . $query;
+            }
+            return $city->code.'/flowers';
+        }
+        if ($route === 'city-product/index') {
+            $url = trim(Yii::$app->request->pathInfo, '/');
+            $explode = explode('/',$url);
+            $city = City::find()->where(['code'=>$explode[0]])->one();
             $query = http_build_query($params);
             if (!empty($query)) {
                 return $city->code.'/flowers?' . $query;
